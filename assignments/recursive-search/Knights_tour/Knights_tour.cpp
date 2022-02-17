@@ -9,6 +9,7 @@ std::string field = "_:";
 
 
 void print_arr(std::string **arr, int n){
+  std::cout << "\n";
   for (int i = 0; i < n; i++){
     for (int j = 0; j < n; j++){
       std::cout << arr[i][j] << " \n"[j == n-1];
@@ -21,7 +22,7 @@ void print_arr(std::string **arr, int n){
 void k_tour(std::string **board, int n, int r, int c, int &mov){
   
   // need to update base case.
-  if (n == 0) return;
+  if (mov == n*n+1) return;
   
   // bound handler
   if (r < 0 || c < 0 || r > n-1 || c > n-1
