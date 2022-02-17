@@ -4,6 +4,16 @@ std::string field = " . ";
 std::string q_path = " x ";
 
 
+void print_arr(std::string **arr, int n){
+  for (int i = 0; i < n; i++){
+    for (int j = 0; j < n; j++){
+      std::cout << arr[i][j] << " \n"[j == n-1];
+    }
+  }
+  std::cout << "\n";
+}
+
+
 void n_queens(std::string **board, int n, int r, int c){
   
   if (n == 0) return;
@@ -23,6 +33,7 @@ void n_queens(std::string **board, int n, int r, int c){
   
   // diagonal
 }
+
 
 int main(){
 

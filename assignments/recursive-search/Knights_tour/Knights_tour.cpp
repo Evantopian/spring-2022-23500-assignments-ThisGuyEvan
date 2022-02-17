@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unistd.h>
 
+
 // recursively code knight's tour.
 
 
@@ -26,7 +27,6 @@ void k_tour(std::string **board, int n, int r, int c, int &mov){
   if (r < 0 || c < 0 || r > n-1 || c > n-1
       || board[r][c] != field)
     return;
-  
   
   board[r][c] = (mov < 10) ? "0" + std::to_string(mov) + ":" :
                                    std::to_string(mov) + ":";
