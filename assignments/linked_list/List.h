@@ -8,7 +8,13 @@ class List{
    
   public:
     List();
+    ~List();
+    
+  
+    void insert(std::string data); // prepends
+    int insertIndex(std::string data, int index);
 
-    void insert(std::string data);
     std::string toString();
+    
+    
 };
