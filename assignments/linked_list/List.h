@@ -15,6 +15,6 @@ class List{
     int insertIndex(std::string data, int index);
 
     std::string toString();
-    
+    Node locate(int index); 
     
 };

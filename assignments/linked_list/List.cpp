@@ -6,15 +6,24 @@ List::List(){
 
 }
 
+
 List::~List(){
-  delete head;
+  Node *n = head;
+  while(n != nullptr){
+    Node *n2 = n;
+    delete n2;
+    n = n->getNext();
+  }
+  head = nullptr;    
 }
+
 
 void List::insert(std::string data){
   Node *n1 = new Node(data);
   n1->setNext(head);
   head = n1;
 }
+
 
 std::string List::toString(){
   if (head == nullptr){
@@ -41,3 +50,18 @@ int List::insertIndex(std::string data,int index){
   
   return -1;
 }
+
+
+Node List::locate(int index){
+  Node *walker = head;
+  int count = 0;
+
+  while(walker != nullptr && count < index-1){
+    walker = walker->getNext();
+    count++;
+  }
+
+  return *walker;
+}
+
+
