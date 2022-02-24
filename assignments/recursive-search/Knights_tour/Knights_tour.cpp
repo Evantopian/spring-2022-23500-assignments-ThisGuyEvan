@@ -8,32 +8,32 @@
 std::string field = "_:";
 
 
-void print_arr(std::string **arr, int n){
+void print_arr(int **arr, int n){
   std::cout << "\n";
   for (int i = 0; i < n; i++){
     for (int j = 0; j < n; j++){
-      std::cout << arr[i][j] << " \n"[j == n-1];
+      printf("%3d", arr[i][j]);
     }
+    std::cout << "\n";
   }
   std::cout << "\n";
 }
 
 
-void k_tour(std::string **board, int n, int r, int c, int &mov){
+void k_tour(int **board, int n, int r, int c, int &mov){
   
   // need to update base case.
   if (mov == n*n+1) return;
   
   // bound handler
   if (r < 0 || c < 0 || r > n-1 || c > n-1
-      || board[r][c] != field)
+      || board[r][c] != 0)
     return;
   
-  board[r][c] = (mov < 10) ? "0" + std::to_string(mov) + ":" :
-                                   std::to_string(mov) + ":";
+  board[r][c] = mov;
   mov++;
   
-  //usleep(100000);
+  usleep(1000000);
   print_arr(board, n);
   
   // up, down
@@ -55,18 +55,13 @@ int main(){
   
   // init arr
   int n = 5;
-  std::string **board;
-  board = new std::string *[n];
+  int **board;
+  board = new int *[n];
 
   for (int i = 0; i < n; i++){
-    board[i] = new std::string[n];
+    board[i] = new int[n];
   }
 
-  for (int i = 0; i < n; i++){
-    for (int j = 0; j < n; j++){
-      board[i][j] = field;
-    }
-  }
 
   int mov = 1;
   k_tour(board, n, 2, 2, mov);
