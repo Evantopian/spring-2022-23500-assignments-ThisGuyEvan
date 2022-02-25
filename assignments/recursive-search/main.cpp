@@ -24,8 +24,8 @@ void k_tour(int * * board, int n, int r, int c, int mov, bool & goal) {
     return;
   }
 
-  if (r < 0 || c < 0 || r >= n || c >= n
-      || board[r][c] != 0) {
+  if (r < 0 || c < 0 || r >= n || 
+      c >= n || board[r][c] != 0) {
     return;
   }
 
