@@ -33,7 +33,7 @@ void k_tour(int **board, int n, int r, int c, int &mov){
   board[r][c] = mov;
   mov++;
   
-  usleep(1000000);
+  //usleep(500000);
   print_arr(board, n);
   
   // up, down
@@ -62,7 +62,7 @@ int main(){
     board[i] = new int[n];
   }
 
-
+  // (2, 2) works
   int mov = 1;
   k_tour(board, n, 2, 2, mov);
   
