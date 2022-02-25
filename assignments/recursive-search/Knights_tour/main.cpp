@@ -5,13 +5,10 @@
 // recursively code knight's tour.
 
 
-std::string field = "_:";
-
-
-void print_arr(int **arr, int n){
+void print_arr(int * * arr, int n) {
   std::cout << "\n";
-  for (int i = 0; i < n; i++){
-    for (int j = 0; j < n; j++){
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
       printf("%3d", arr[i][j]);
     }
     std::cout << "\n";
@@ -20,55 +17,59 @@ void print_arr(int **arr, int n){
 }
 
 
-void k_tour(int **board, int n, int r, int c, int &mov){
-  
-  // need to update base case.
-  if (mov == n*n+1) return;
-  
-  // bound handler
-  if (r < 0 || c < 0 || r > n-1 || c > n-1
-      || board[r][c] != 0)
-    return;
-  
-  board[r][c] = mov;
-  mov++;
-  
-  //usleep(500000);
-  print_arr(board, n);
-  
-  // up, down
-  k_tour(board, n, r-1, c+2, mov);
-  k_tour(board, n, r+1, c+2, mov);
-  k_tour(board, n, r-1, c-2, mov);
-  k_tour(board, n, r+1, c-2, mov);
+void k_tour(int * * board, int n, int r, int c, int mov, bool & goal) {
 
-  // left, right 
-  k_tour(board, n, r+2, c-1, mov);
-  k_tour(board, n, r+2, c+1, mov);
-  k_tour(board, n, r-2, c-1, mov);
-  k_tour(board, n, r-2, c+1, mov);
+  if (mov == n * n + 1) {
+    goal = false;
+    return;
+  }
+
+  if (r < 0 || c < 0 || r >= n || c >= n
+      || board[r][c] != 0) {
+    return;
+  }
+
+  board[r][c] = mov;
+
+  if (goal) k_tour(board, n, r - 2, c + 1, mov + 1, goal);
+  if (goal) k_tour(board, n, r - 1, c + 2, mov + 1, goal);
+  if (goal) k_tour(board, n, r + 2, c - 1, mov + 1, goal);
+  if (goal) k_tour(board, n, r + 1, c - 2, mov + 1, goal);
+  if (goal) k_tour(board, n, r + 2, c + 1, mov + 1, goal);
+  if (goal) k_tour(board, n, r + 1, c + 2, mov + 1, goal);
+  if (goal) k_tour(board, n, r - 2, c - 1, mov + 1, goal);
+  if (goal) k_tour(board, n, r - 1, c - 2, mov + 1, goal);
+
+  if (goal) board[r][c] = 0;
 }
 
 
-
-int main(){
-  
+int main() {
   // init arr
   int n = 5;
-  int **board;
-  board = new int *[n];
+  int * * board;
+  board = new int * [n];
 
-  for (int i = 0; i < n; i++){
+  for (int i = 0; i < n; i++) {
     board[i] = new int[n];
   }
 
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      board[i][j] = 0;
+    }
+  }
+
   // (2, 2) works
-  int mov = 1;
-  k_tour(board, n, 2, 2, mov);
-  
-  // del arr
-  for (int i = 0; i < n; i++){
-    delete [] board[i]; 
+
+  bool valid = true;
+  std::cout << "Solution Using: R = 1, C = 1\n";
+  k_tour(board, n, 1, 1, 1, valid);
+  print_arr(board, n);
+
+
+  for (int i = 0; i < n; i++) {
+    delete [] board[i];
   }
   delete board;
 
