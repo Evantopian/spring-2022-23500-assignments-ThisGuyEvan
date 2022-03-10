@@ -5,7 +5,6 @@
 void printVec(std::vector<int> vec) {
   for (auto it : vec) {
     std::cout << it << ", ";
-
   }
   std::cout << "\n";
 }

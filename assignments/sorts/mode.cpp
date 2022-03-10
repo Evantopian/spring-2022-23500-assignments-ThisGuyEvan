@@ -1,49 +1,51 @@
 #include <iostream>
 #include <vector>
-#include <unistd.h>
-#include <cstdlib>
 #include <sys/time.h>
 
-void print_vector(std::vector<int> vec){
-  for (auto it : vec){
+
+void print_vector(std::vector<int> vec) {
+  for (auto it : vec) {
     std::cout << it << ", ";
   }
   std::cout << "\n";
 }
 
-int count(std::vector<int> vec, int x){
+int count(std::vector<int> vec, int x) {
   int cnt = 0;
 
-  for(int i = 0; i < vec.size(); i++){
-    if(vec[i] == x){
+  for (int i = 0; i < vec.size(); i++) {
+    if (vec[i] == x) {
       cnt++;
     }
   }
   return cnt;
 }
 
-int largest(std::vector<int> vec){
+
+int largest(std::vector<int> vec) {
   int max = 0;
 
-  for(int i = 0; i < vec.size(); i++){
-    if(vec[i] > max){
+  for (int i = 0; i < vec.size(); i++) {
+    if (vec[i] > max) {
       max = vec[i];
     }
   }
   return max;
 }
 
-int mode(std::vector<int> vec){
+
+int mode(std::vector<int> vec) {
   int mode = 0, freqs = 0;
 
-  for(int i = 0; i < vec.size(); i++){
-    if((count(vec, vec[i])) > freqs){
+  for (int i = 0; i < vec.size(); i++) {
+    if ((count(vec, vec[i])) > freqs) {
       freqs = count(vec, vec[i]);
       mode = vec[i];
     }
   }
   return mode;
 }
+
 
 std::vector<int> makeVec(int n, int max) {
   std::vector<int> vec(n);
@@ -55,7 +57,7 @@ std::vector<int> makeVec(int n, int max) {
 }
 
 
-int main(){
+int main() {
   srand(time(nullptr));
   std::vector<int> v1 = makeVec(10, 10);
 
