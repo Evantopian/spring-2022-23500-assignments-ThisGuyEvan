@@ -38,7 +38,7 @@ int mode(std::vector<int> vec) {
   int mode = 0, freqs = 0;
 
   for (int i = 0; i < vec.size(); i++) {
-    if ((count(vec, vec[i])) > freqs) {
+    if (count(vec, vec[i]) > freqs) {
       freqs = count(vec, vec[i]);
       mode = vec[i];
     }
