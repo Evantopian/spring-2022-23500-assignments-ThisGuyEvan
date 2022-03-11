@@ -20,7 +20,7 @@ List::~List() {
 void List::insert(int data) {
   Node *walker = head;
   Node *trailer = nullptr;
-  Node *temp = new Node(data);
+  Node *tmp = new Node(data);
 
   while (walker != nullptr && data > walker->getData()) {
     trailer = walker;
@@ -28,11 +28,11 @@ void List::insert(int data) {
   }
 
   if (trailer == nullptr) {
-    temp->setNext(head);
-    head = temp;
+    tmp->setNext(head);
+    head = tmp;
   } else {
-    trailer->setNext(temp);
-    temp->setNext(walker);
+    trailer->setNext(tmp);
+    tmp->setNext(walker);
   }
 
   return;

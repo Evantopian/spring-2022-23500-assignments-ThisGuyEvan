@@ -1,6 +1,7 @@
 #include <iostream>
 #include "OList.h"
 
+
 OList::OList() {
   head = nullptr;
 }
@@ -15,25 +16,25 @@ OList::~OList() {
   }
 }
 
+
 void OList::insert(int data) {
   Node * walker = head;
   Node * trailer = nullptr;
-  Node * temp = new Node(data);
+  Node * tmp = new Node(data);
 
+  // increasing order.
   while (walker != nullptr && data > walker->getData()) {
     trailer = walker;
     walker = walker->getNext();
   }
 
   if (trailer == nullptr) {
-    temp->setNext(head);
-    head = temp;
+    tmp->setNext(head);
+    head = tmp;
   } else {
-    trailer->setNext(temp);
-    temp->setNext(walker);
+    trailer->setNext(tmp);
+    tmp->setNext(walker);
   }
-
-  return;
 }
 
 
@@ -51,6 +52,7 @@ std::string OList::toString() {
   return result;
 }
 
+
 bool OList::contains(int data) {
   Node * walker = head;
 
@@ -64,6 +66,7 @@ bool OList::contains(int data) {
 
   return false;
 }
+
 
 int OList::get(int index) {
   Node * walker = head;
@@ -87,7 +90,7 @@ void OList::remove(int index) {
   while (index > 0 && walker != nullptr) {
     trailer = walker;
     walker = walker->getNext();
-    index = index - 1;
+    index--;
   }
 
   if (walker == nullptr) {
@@ -101,4 +104,26 @@ void OList::remove(int index) {
     trailer->setNext(walker->getNext());
     delete walker;
   }
+}
+
+void OList::reverse() {
+  if (head == nullptr) return;
+
+  Node * walker = head;
+  Node * trailer = nullptr;
+  Node * tmp = nullptr;
+
+  // tmp is the nodes after walker's current head
+  // walker's sets its next trailer (e.g 01 becomes 10)
+  // trailer holds nodes of walker allowing walker to become tmp
+  // process goes on (e.g 123 -> null(1)(2)(3) -> (2)(3)(1)(null)
+  // -> (3)(2)(1)(null) since walker becomes null, the process ends.
+  // Reversed.
+  while (walker) {
+    tmp = walker->getNext(); 
+    walker->setNext(trailer);
+    trailer = walker;
+    walker = tmp;
+  }
+  head = trailer;
 }
