@@ -4,13 +4,18 @@
 #include "OList.h"
 
 int main(){
-  OList *l1 = new OList();
-  l1->insert("a"); 
-  l1->insert("b"); 
-  l1->insert("c"); 
+  OList *l = new OList();
+
   
-  std::cout << l1->toString() << "\n";
-  return 0;
+  l->insert(1);
+  l->insert(1);
+  l->insert(2);
+  l->insert(3);
+  l->insert(5);
+  l->insert(8);
+  l->insert(13);
+
+  std::cout << "List: " << l->toString() << "\n\n";
 }
 
 

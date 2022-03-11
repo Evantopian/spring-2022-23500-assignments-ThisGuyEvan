@@ -1,69 +1,100 @@
 #include <iostream>
 #include "OList.h"
 
-
 OList::OList() {
   head = nullptr;
 }
 
+OList::~OList() {
+  Node * trailer = nullptr;
 
-OList::~OList(){
-  Node *trailer;
-  std::cerr << "Destructing\n";
-  while(head != nullptr){
+  while (head != nullptr) {
     trailer = head;
     head = head->getNext();
     delete trailer;
   }
 }
 
-void OList::insert(std::string data){
-  Node *tmp = new Node(data);
-  tmp->setNext(head);
-  this->head = tmp;
-}
+void OList::insert(int data) {
+  Node * walker = head;
+  Node * trailer = nullptr;
+  Node * temp = new Node(data);
 
-
-void OList::insert(int loc, std::string data){
-  Node *tmp = new Node(data);
-
-  Node *walker = head;
-  Node *trailer=nullptr;  
-  while (walker != nullptr && loc > 0){
+  while (walker != nullptr && data > walker->getData()) {
     trailer = walker;
     walker = walker->getNext();
-    loc = loc - 1;
   }
 
-  if (loc > 0){
-    throw std::out_of_range("Out of range");
-  }
-
-  if (trailer==nullptr){
-    tmp->setNext(head);
-    head=tmp;
+  if (trailer == nullptr) {
+    temp->setNext(head);
+    head = temp;
   } else {
-    tmp->setNext(walker);
-    trailer->setNext(tmp);
-  
+    trailer->setNext(temp);
+    temp->setNext(walker);
   }
+
+  return;
 }
 
-void OList::remove(int loc){
 
-  Node *walker = head;
-  Node *trailer=nullptr; 
-  while (walker != nullptr && loc > 0){
+std::string OList::toString() {
+  std::string result = "head --> ";
+  Node * walker = this->head;
+
+  while (walker != nullptr) {
+    result += std::to_string(walker->getData());
+    result += " --> ";
+    walker = walker->getNext();
+  }
+
+  result = result + "nullptr";
+  return result;
+}
+
+bool OList::contains(int data) {
+  Node * walker = head;
+
+  while (walker != nullptr) {
+    if (walker->getData() == data) {
+      return true;
+    }
+
+    walker = walker->getNext();
+  }
+
+  return false;
+}
+
+int OList::get(int index) {
+  Node * walker = head;
+
+  while (walker && index > 0) {
+    walker = walker -> getNext();
+    index--;
+  }
+
+  if (walker != nullptr) {
+    return walker->getData();
+  }
+
+  return -1;
+}
+
+void OList::remove(int index) {
+  Node * walker = head;
+  Node * trailer = nullptr;
+
+  while (index > 0 && walker != nullptr) {
     trailer = walker;
     walker = walker->getNext();
-    loc = loc - 1;
+    index = index - 1;
   }
 
-  if (walker == nullptr){
-    throw std::out_of_range("Out of range");
+  if (walker == nullptr) {
+    throw std::out_of_range("out of range");
   }
 
-  if (trailer==nullptr){
+  if (trailer == nullptr) {
     head = walker->getNext();
     delete walker;
   } else {
@@ -71,43 +102,3 @@ void OList::remove(int loc){
     delete walker;
   }
 }
-
-std::string OList::get(int loc){
-  std::string result = "";
-  Node *walker = head;
-
-  while (walker && loc > 0){
-    walker = walker->getNext();
-    loc--;
-  }
-  if (walker)
-    return walker->getData();
-  else
-    return "";
-    
-    
-}
-
-int OList::length(){
-  int l = 0;
-  Node *walker = head;
-  while (walker){
-    l++;
-    walker = walker->getNext();
-  }
-  return l;
-}
-
-
-std::string OList::toString(){
-  std::string result = "";
-  Node *walker = this->head;
-  while (walker != nullptr){
-    result = result + walker->getData() + "->";
-    walker = walker->getNext();
-  }
-  result = result + "null";
-  return result;
-}
-
-
