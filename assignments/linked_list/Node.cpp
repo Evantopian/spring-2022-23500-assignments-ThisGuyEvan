@@ -9,7 +9,7 @@ Node::Node(int data) {
   this->next = nullptr;
 }
 
-Node::Node(int data, Node *next) {
+Node::Node(int data, Node * next) {
   this->data = data;
   this->next = next;
 }
@@ -19,7 +19,7 @@ void Node::setData(int data) {
   this->data = data;
 }
 
-void Node::setNext(Node *next) {
+void Node::setNext(Node * next) {
   this->next = next;
 }
 

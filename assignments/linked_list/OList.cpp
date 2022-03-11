@@ -57,13 +57,9 @@ bool OList::contains(int data) {
   Node * walker = head;
 
   while (walker != nullptr) {
-    if (walker->getData() == data) {
-      return true;
-    }
-
+    if (walker->getData() == data) return true;
     walker = walker->getNext();
   }
-
   return false;
 }
 
@@ -120,7 +116,7 @@ void OList::reverse() {
   // -> (3)(2)(1)(null) since walker becomes null, the process ends.
   // Reversed.
   while (walker) {
-    tmp = walker->getNext(); 
+    tmp = walker->getNext();
     walker->setNext(trailer);
     trailer = walker;
     walker = tmp;
