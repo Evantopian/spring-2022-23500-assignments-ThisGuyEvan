@@ -3,18 +3,20 @@
 #include "Node.h"
 
 class List{
-  private: 
-    Node *head;
-   
-  public:
-    List();
-    ~List();
-    
-  
-    void insert(std::string data); // prepends
-    int insertIndex(std::string data, int index);
+ private: Node *head;
 
-    std::string toString();
-    Node locate(int index); 
-    
+ public:
+  List();
+  ~List();
+
+  void insert(std::string data);
+  void insert(int loc, std::string data);
+
+  void remove(int loc);
+  
+  std::string get(int loc);
+
+  int length();
+
+  std::string toString();  
 };

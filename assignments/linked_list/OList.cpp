@@ -1,13 +1,13 @@
 #include <iostream>
-#include <stdexcept>
-#include "List.h"
+#include "OList.h"
 
-List::List() {
+
+OList::OList() {
   head = nullptr;
 }
 
 
-List::~List(){
+OList::~OList(){
   Node *trailer;
   std::cerr << "Destructing\n";
   while(head != nullptr){
@@ -17,14 +17,14 @@ List::~List(){
   }
 }
 
-void List::insert(std::string data){
+void OList::insert(std::string data){
   Node *tmp = new Node(data);
   tmp->setNext(head);
   this->head = tmp;
 }
 
 
-void List::insert(int loc, std::string data){
+void OList::insert(int loc, std::string data){
   Node *tmp = new Node(data);
 
   Node *walker = head;
@@ -49,7 +49,7 @@ void List::insert(int loc, std::string data){
   }
 }
 
-void List::remove(int loc){
+void OList::remove(int loc){
 
   Node *walker = head;
   Node *trailer=nullptr; 
@@ -72,7 +72,7 @@ void List::remove(int loc){
   }
 }
 
-std::string List::get(int loc){
+std::string OList::get(int loc){
   std::string result = "";
   Node *walker = head;
 
@@ -88,7 +88,7 @@ std::string List::get(int loc){
     
 }
 
-int List::length(){
+int OList::length(){
   int l = 0;
   Node *walker = head;
   while (walker){
@@ -99,7 +99,7 @@ int List::length(){
 }
 
 
-std::string List::toString(){
+std::string OList::toString(){
   std::string result = "";
   Node *walker = this->head;
   while (walker != nullptr){

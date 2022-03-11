@@ -1,7 +1,10 @@
-main: main.o List.o Node.o
-	g++ -o main main.o Node.o List.o
+OBJECTS = main.o List.o Node.o OList.o 
+CXXFLAGS = -std=c++11
 
-main.o: main.cpp Node.h
+main: $(OBJECTS) 
+	g++ $(CXXFLAGS) -o main $(OBJECTS) 
+
+main.o: main.cpp List.h Node.h
 	g++ -c main.cpp
 
 List.o: List.cpp List.h Node.h
@@ -9,6 +12,9 @@ List.o: List.cpp List.h Node.h
 
 Node.o: Node.cpp Node.h
 	g++ -c Node.cpp
+
+OList.o: OList.cpp OList.h Node.h
+	g++ -c OList.cpp
 
 clean:
 	rm -rf *.o main
