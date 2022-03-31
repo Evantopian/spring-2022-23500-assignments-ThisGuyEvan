@@ -421,4 +421,3 @@ MazeCell* twistyMazeFor(const string& name) {
 
     return maze[locations[0]];
 }
-
