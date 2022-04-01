@@ -4,7 +4,7 @@
 
 
 bool isPathToFreedom(MazeCell* start, const std::string& moves) {
-    bool book, potion, wand;
+    bool book = 0, potion = 0, wand = 0;
     MazeCell * cell = start;
 
     for (char ch : moves){   
