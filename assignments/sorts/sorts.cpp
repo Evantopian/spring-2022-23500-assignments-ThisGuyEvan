@@ -256,7 +256,9 @@ int main(int argc, char * argv[]) {
     a = qsort(a);
     break;
   case 'r':
-    qsort2(a, 0, a.size() - 1);
+    qsort2(a, 0, a.size()-1);
+    //qsort2(a, 0, a.size() - 1);
+
     break;
   }
 
