@@ -13,8 +13,9 @@ std::string BSTree::traverse(Node *st) {
   if (st == nullptr){
     return "";
   }
+  // parentheses to show subtree.
   else{
-    return std::to_string(st->getData()) + " -> " + traverse(st->getLeft()) + traverse(st->getRight());
+    return std::to_string(st->getData()) + " -> (" + traverse(st->getLeft()) + ") " + "(" + traverse(st->getRight()) + ")";
   }
 }
 
@@ -47,6 +48,6 @@ void BSTree::setup(){
   n2->setLeft(n);
 
   n = new Node(70);
-  n2->setLeft(n);
+  n2->setRight(n);
 }
 
