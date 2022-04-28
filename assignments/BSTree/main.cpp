@@ -1,8 +1,17 @@
 #include <iostream>
 #include "Node.h"
-
+#include "BSTree.h"
 
 int main(){
+
+  BSTree *bst = new BSTree();
+  bst->setup();
+  
+  std::cout << bst->get_debug_string() << std::endl;
+
+
+
+  /*
   Node *root = new Node(0);
  
   Node *n = new Node(10);
@@ -20,6 +29,5 @@ int main(){
   
   n = new Node(60);
   root->getRight()->setRight(n);
-
-
+*/
 }
