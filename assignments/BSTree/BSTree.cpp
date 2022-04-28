@@ -15,7 +15,8 @@ std::string BSTree::traverse(Node *st) {
   }
   // parentheses to show subtree.
   else{
-    return std::to_string(st->getData()) + " -> (" + traverse(st->getLeft()) + ") " + "(" + traverse(st->getRight()) + ")";
+    return std::to_string(st->getData()) + " -> (" + traverse(st->getLeft()) + ") " + 
+                                               "(" + traverse(st->getRight()) + ")";
   }
 }
 
