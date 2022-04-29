@@ -19,7 +19,7 @@ void Stack::push(int data){
 
 
 int Stack::pop(){
-  if (size == 0) throw STACK_ERR_EMPTY;
+  if (size == 0) throw 1;
 
   int x = ll->get(size-1);
   ll->remove(size-1);
@@ -29,7 +29,7 @@ int Stack::pop(){
 
 
 int Stack::top(){
-  if (size < 0) throw STACK_ERR_EMPTY;
+  if (size < 0) throw 1; 
   return ll->get(size-1);
 }
 

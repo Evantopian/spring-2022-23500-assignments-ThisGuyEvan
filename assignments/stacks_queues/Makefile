@@ -1,4 +1,4 @@
-OBJECTS = stack.o Node.o OList.o 
+OBJECTS = stack.o queue.o Node.o OList.o  
 CXXFLAGS = -std=c++11
 
 main: main.o $(OBJECTS) 
@@ -15,6 +15,9 @@ main.o: main.cpp stack.h
 
 stack.o: stack.cpp stack.h
 	g++ -c stack.cpp
+
+queue.o: queue.cpp queue.h
+	g++ -c queue.cpp
 
 OList.o: OList.cpp OList.h
 	g++ -c OList.cpp
