@@ -1,11 +1,16 @@
 #include <iostream>
 #include "stack.h"
 
-
 Stack::Stack(){
   ll = new OList();
   size = 0;
 }
+
+
+Stack::~Stack(){
+  delete ll;
+}
+
 
 void Stack::push(int data){
   ll->insert(data);

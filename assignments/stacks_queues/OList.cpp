@@ -6,6 +6,7 @@ OList::OList() {
   head = nullptr;
 }
 
+
 OList::~OList() {
   Node * trailer = nullptr;
 
