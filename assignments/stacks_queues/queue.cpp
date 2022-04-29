@@ -25,7 +25,7 @@ void Queue::enqueue(int data){
 
 
 int Queue::dequeue(){
-  if (is_empty()) throw 2;
+  if (is_empty()) throw 1;
   int x = q[head%max_size];
   head++; 
 

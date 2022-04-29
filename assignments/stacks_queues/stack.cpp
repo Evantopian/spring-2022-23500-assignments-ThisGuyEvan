@@ -40,7 +40,7 @@ int Stack::getSize(){
 
 
 bool Stack::is_empty(){
-  return size-1 == 0;
+  return size == 0;
 }
 
 

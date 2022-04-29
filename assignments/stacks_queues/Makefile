@@ -4,8 +4,8 @@ CXXFLAGS = -std=c++11
 main: main.o $(OBJECTS) 
 	g++ -o main main.o $(OBJECTS)
 
-tests: tests.o stack.o OList.o Node.o 
-	g++ -o tests tests.o stack.o OList.o Node.o 
+tests: tests.o $(OBJECTS) 
+	g++ -o tests tests.o $(OBJECTS) 
 
 tests.o: tests.cpp doctest.h
 	g++ -c tests.cpp
