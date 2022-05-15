@@ -8,7 +8,7 @@ int main(){
   bst->setup();
   std::cout << bst->get_debug_string() << std::endl;
 
-  bst->delete_node(bst->get_root(), 70);
+  bst->delete_node(bst->get_root(), 18);
 
   std::cout << bst->get_debug_string() << std::endl;
 
