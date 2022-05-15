@@ -6,10 +6,11 @@ int main(){
 
   BSTree *bst = new BSTree();
   bst->setup();
-  
   std::cout << bst->get_debug_string() << std::endl;
 
+  bst->delete_node(bst->get_root(), 70);
 
+  std::cout << bst->get_debug_string() << std::endl;
 
   /*
   Node *root = new Node(0);

@@ -20,12 +20,32 @@ std::string BSTree::traverse(Node *st) {
   }
 }
 
+Node *BSTree::get_root(){
+  return root;
+}
 
 std::string BSTree::get_debug_string(){
   if (root != nullptr){
     return traverse(root) + "nullptr";
   }
   return nullptr;
+}
+
+
+// delete a node in the bst
+void BSTree::delete_node(Node * st, int n){
+
+  if (st == nullptr) return;  
+  if (st->getLeft()->getData() == n){
+    st->setLeft(nullptr);
+    return;
+  }
+  if (st->getRight()->getData() == n){
+    st->setRight(nullptr);
+    return; 
+  }
+  if (n < st->getData()) delete_node(st->getLeft(), n);
+  if (n > st->getData()) delete_node(st->getRight(), n);
 }
 
 
