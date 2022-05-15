@@ -31,32 +31,67 @@ std::string BSTree::get_debug_string(){
   return nullptr;
 }
 
-// delete a node in the bst
-void BSTree::delete_node(Node * st, int n){
+void BSTree::insert(int value){
+  Node *newnode = new Node(value);
   
-  if (st == nullptr) return; 
-
-  // case #1: delete at depth
-  Node *l = st->getLeft(); //left node of current subtree
-  Node *r = st->getRight(); //right node of current subtree
-
-  // given a  correct bst, the value on the left will always be the replacement
-  // at the left hand side:
-  if (l->getData() == n){
-    Node * tmp = l->getRight();
-    st->setLeft(l->getLeft());
-    st->getLeft()->setRight(tmp);
-    l->setLeft(nullptr);
-    return;
-  }  
-
-
-
-  // searching bst for node.
-  if (n < st->getData()) delete_node(st->getLeft(), n);
-  if (n > st->getData()) delete_node(st->getRight(), n);
+  Node *p = root;
+  Node *trailer;
+  
+  while (p != nullptr) {
+    trailer = p;
+    if (p->getData() == value){
+      return;
+    }
+    else if (p->getData() < value){
+      p = p->getRight(); 
+    } else {
+      p = p->getLeft();
+    }
+  }
+  
+  if (root==nullptr){
+    root=newnode;
+  } else {
+    if (trailer->getData() < value){
+      trailer->setRight(newnode);
+    } else {
+      trailer->setLeft(newnode);
+    }
+  }
 }
 
+
+Node * BSTree::search_node(Node * n, int value){
+  if (n){
+    if (n->getData() > value) n = search_node(n->getLeft(), value);
+    else if (n->getData() < value) n = search_node(n->getRight(), value);
+  }
+  return n;
+}
+
+Node * BSTree::searchR(int x){
+  return search_node(root, x);
+}
+
+
+
+
+void BSTree::remove(Node * n, int x){
+  if (n){
+    Node *del_node = search_node(n, x);
+    std::cout << del_node->getData() << "\n";
+  }
+}
+
+
+
+
+
+
+
+void BSTree::delete_node(int x){
+  remove(root, x);
+}
 
 void BSTree::setup(){
   Node *n = new Node(20);
@@ -74,6 +109,9 @@ void BSTree::setup(){
 
   n2 = new Node(40);
   n->setRight(n2);
+
+  n2 = new Node(25);
+  n->getRight()->setLeft(n2);
   
   n2 = new Node(55);
   n->getRight()->setRight(n2);

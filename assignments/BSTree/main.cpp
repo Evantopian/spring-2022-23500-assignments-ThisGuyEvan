@@ -5,11 +5,20 @@
 int main(){
 
   BSTree *bst = new BSTree();
-  bst->setup();
+  
+  bst->insert(5);
+  bst->insert(2);
+  bst->insert(12);
+  bst->insert(-4);
+  bst->insert(3);
+  bst->insert(9);
+  bst->insert(21);
+  bst->insert(19);
+  bst->insert(25);
+
+
   std::cout << bst->get_debug_string() << std::endl;
-
-  bst->delete_node(bst->get_root(), 18);
-
+  bst->delete_node(19);
   std::cout << bst->get_debug_string() << std::endl;
 
   /*
