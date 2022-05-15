@@ -85,12 +85,15 @@ Node * BSTree::searchR(int x){
 // c = child node to delete
 
 
+
+
+
 void BSTree::remove(int x){
   // p = parent node, c = child node.
   Node * c = search_node(root, x, false);
   Node * p = search_node(root, x, true);
  
-  // case #1
+  // case #1: no child node
   if (c->getLeft() == c->getRight()){
     if (p->getData() < c->getData()){
       p->setRight(nullptr);
@@ -101,7 +104,19 @@ void BSTree::remove(int x){
     return;
   } 
   
-  // case #2
+  // case #3 (needs to be cleaned a bit)
+  Node *tmp = p;
+  if (c->getLeft() != nullptr && c->getRight() != nullptr){
+    while (p->getRight()->getRight() != nullptr){
+      c = p->getRight();
+      p = p->getRight();
+    }
+    c = p->getLeft();
+    Node *p1 = p;
+    p = tmp;
+    p->getRight()->setData(c->getData());
+    p1->setLeft(nullptr);
+  }
    
 
   
