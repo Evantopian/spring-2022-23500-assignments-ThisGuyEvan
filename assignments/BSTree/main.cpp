@@ -10,6 +10,7 @@ int main(){
   bst->insert(2);
   bst->insert(12);
   bst->insert(-4);
+  bst->insert(4);
   bst->insert(3);
   bst->insert(9);
   bst->insert(21);
@@ -19,7 +20,7 @@ int main(){
 
   std::cout << bst->get_debug_string() << std::endl;
   //std::cout << bst->searchR(-4)->getData() << "\n";
-  bst->delete_node(12);
+  bst->delete_node(4);
   std::cout << bst->get_debug_string() << std::endl;
 
   /*

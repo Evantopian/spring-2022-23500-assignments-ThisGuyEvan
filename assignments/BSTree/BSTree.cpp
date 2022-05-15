@@ -111,17 +111,32 @@ void BSTree::remove(int x){
       c = p->getRight();
       p = p->getRight();
     }
+
     c = p->getLeft();
     Node *p1 = p;
     p = tmp;
+
     p->getRight()->setData(c->getData());
     p1->setLeft(nullptr);
+    return;
   }
-   
 
-  
+  /* doing case 2 last since in terms of a binary tree, we know that 
+    there can only be 0, 1 or 2 children. The "easiest" way of coding this, 
+    or atleast to me is fulfilling the min, 0 condition, and the max, 2 nodes,
+    and then tackling the 1 condition 
+  */   
 
-
+  // case 2:
+  c = c->getLeft() != nullptr ? c->getLeft() : c->getRight();
+  if (p->getLeft()->getData() == x){
+    p->setLeft(nullptr);
+    p->setLeft(c);
+  }
+  else{
+    p->setRight(nullptr);
+    p->setRight(c);
+  }
 
   std::cout << "PN: " << p->getData() << " | CN: " << c->getData() << "\n";
 }
