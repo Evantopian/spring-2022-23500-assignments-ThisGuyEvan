@@ -18,7 +18,8 @@ int main(){
 
 
   std::cout << bst->get_debug_string() << std::endl;
-  bst->delete_node(19);
+  //std::cout << bst->searchR(-4)->getData() << "\n";
+  bst->delete_node(-4);
   std::cout << bst->get_debug_string() << std::endl;
 
   /*

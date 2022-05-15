@@ -61,37 +61,62 @@ void BSTree::insert(int value){
 }
 
 
-Node * BSTree::search_node(Node * n, int value){
-  if (n){
-    if (n->getData() > value) n = search_node(n->getLeft(), value);
-    else if (n->getData() < value) n = search_node(n->getRight(), value);
+Node * BSTree::search_node(Node * n, int x, bool p){
+  if (n->getData() != x && n != nullptr){
+    
+    if (p){
+      if (n->getLeft()->getData() == x || 
+          n->getRight()->getData() == x) return n;
+    }
+
+    n = n->getData() > x ? search_node(n->getLeft(), x, p) :
+                           search_node(n->getRight(), x, p);
   }
   return n;
 }
 
+
+// toggles for parent and child node.
 Node * BSTree::searchR(int x){
-  return search_node(root, x);
+  return search_node(root, x, false);
 }
 
+// p = parent node
+// c = child node to delete
+
+
+void BSTree::remove(int x){
+  // p = parent node, c = child node.
+  Node * c = search_node(root, x, false);
+  Node * p = search_node(root, x, true);
+ 
+  // case #1
+  if (c->getLeft() == c->getRight()){
+    if (p->getData() < c->getData()){
+      p->setRight(nullptr);
+    }
+    else{
+      p->setLeft(nullptr);
+    }
+    return;
+  } 
+  
+  // case #2
+   
+
+  
 
 
 
-void BSTree::remove(Node * n, int x){
-  if (n){
-    Node *del_node = search_node(n, x);
-    std::cout << del_node->getData() << "\n";
-  }
+  std::cout << "PN: " << p->getData() << " | CN: " << c->getData() << "\n";
 }
-
-
-
-
 
 
 
 void BSTree::delete_node(int x){
-  remove(root, x);
+  remove(x);
 }
+
 
 void BSTree::setup(){
   Node *n = new Node(20);
