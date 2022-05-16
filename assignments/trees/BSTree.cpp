@@ -120,26 +120,44 @@ void BSTree::remove(int x) {
 
     p->getRight()->setData(c->getData());
     p1->setLeft(nullptr);
-    return;
   }
-  // case 2:
-  c = c->getLeft() != nullptr ? c->getLeft() : c->getRight();
-  if (p->getLeft()->getData() == x) {
-    p->setLeft(nullptr);
-    p->setLeft(c);
-  } else {
-    p->setRight(nullptr);
-    p->setRight(c);
+  else{
+    // case 2:
+    c = c->getLeft() != nullptr ? c->getLeft() : c->getRight();
+    if (p->getLeft()->getData() == x) {
+      p->setLeft(nullptr);
+      p->setLeft(c);
+    } else {
+      p->setRight(nullptr);
+      p->setRight(c);
+    }
+    p = nullptr, c = nullptr;
+    delete c;
+    delete p;
   }
-  p = nullptr, c = nullptr;
-  delete c;
-  delete p;
 }
 
 
 
 void BSTree::delete_node(int x) {
   remove(x);
+}
+
+int BSTree::leaves(Node * n, int cnt){
+  if (n == nullptr) return 0;
+
+  if (n->getLeft() == nullptr && n->getRight() == nullptr){
+    cnt++; 
+  }
+  else{
+    return leaves(n->getLeft(), cnt) + leaves(n->getRight(), cnt);
+  }
+  return cnt;
+}
+
+
+int BSTree::count_leaves(){
+  return leaves(root, 0);
 }
 
 
