@@ -8,7 +8,7 @@ main.o: main.cpp BSTree.h Node.h
 	g++ -c main.cpp
 
 
-tests: tests.o $(OBJECTS)
+tests: tests.o doctest.h $(OBJECTS)
 	g++ $(CXXFLAGS) -o tests tests.o $(OBJECTS)
 
 test.o: tests.cpp BSTree.h Node.h
@@ -18,7 +18,6 @@ Node.o: Node.cpp Node.h
 
 BSTree.o: BSTree.cpp BSTree.h Node.h
 	g++ -c BSTree.cpp
-
 
 
 clean:

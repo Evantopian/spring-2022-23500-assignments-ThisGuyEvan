@@ -20,27 +20,18 @@ int main(){
 
   std::cout << bst->get_debug_string() << std::endl;
   //std::cout << bst->searchR(-4)->getData() << "\n";
-  bst->delete_node(4);
+  //bst->delete_node(4);
+  bst->delete_node(3);
+  bst->delete_node(19);
+  bst->delete_node(-4);
+  bst->insert(17);
+  bst->insert(1);
+  bst->insert(-2);
+
+
   std::cout << bst->get_debug_string() << std::endl;
-  std::cout << bst->count_leaves() << std::endl;
+  std::cout << "Leaves: " << bst->count_leaves() << std::endl;
+  std::cout << "Height: " << bst->height() << std::endl;
+  std::cout << "SumLvl: " << bst->sum_level(3) << std::endl; 
 
-  /*
-  Node *root = new Node(0);
- 
-  Node *n = new Node(10);
-  root->setLeft(n);
-
-  n = new Node(50);
-  root->setRight(n);
-  
-  std::cout << root->getData() << "\n";
-  std::cout << root->getLeft()->getData() << " | " << 
-               root->getRight()->getData() << std::endl;
-
-  n = new Node(20);
-  root->getLeft()->setLeft(n);
-  
-  n = new Node(60);
-  root->getRight()->setRight(n);
-*/
 }

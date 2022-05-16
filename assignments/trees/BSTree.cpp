@@ -1,7 +1,8 @@
 #include <iostream>
+#include <string>
+#include <algorithm>
 #include "Node.h"
 #include "BSTree.h"
-
 
 BSTree::BSTree() {
   root = nullptr;
@@ -15,8 +16,8 @@ std::string BSTree::traverse(Node * st) {
   }
   // parentheses to show subtree.
   else {
-    return std::to_string(st->getData()) + " -> (" + traverse(st->getLeft()) + ") " +
-           "(" + traverse(st->getRight()) + ")";
+    return std::to_string(st->getData()) + " ->(" + traverse(st->getLeft()) + ")" +
+           "->(" + traverse(st->getRight()) + ")";
   }
 }
 
@@ -30,6 +31,63 @@ std::string BSTree::get_debug_string() {
   }
   return nullptr;
 }
+
+
+int BSTree::search(int value) {
+  Node * t = root;
+
+  while (t != nullptr) {
+    int tval = t->getData();
+    if (tval == value) {
+      // here we'd really return a full object
+      // with all the stuff associated with value
+      // not just an int
+      return value;
+    }
+
+    if (tval < value) {
+      t = t->getRight();
+    } else {
+      t = t->getLeft();
+    }
+
+  }
+
+  // if we get here then the value isn't
+  // in the tree
+
+  // normally, if we had a tree of objects
+  // we could return null but since we only have
+  // an int, we can't return an int to represent
+  // not found so we'll throw an exception
+
+  throw 1; // we should define our exceptions.
+}
+
+int BSTree::rsearch(int value, Node * n) {
+  if (n == nullptr) {
+    throw 3;
+  } // If n becomes nullptr, throw exception.
+
+  int data = n->getData();
+  if (value == data) {
+    return data;
+  } // Just return data if the value is equal to the node's current data.
+
+  else if (value < data) {
+    return rsearch(value, n->getLeft());
+  } // Search left subtree to check if value is less than that node's value.
+
+  else {
+    return rsearch(value, n->getRight());
+  } // Search right subtree to check if value is greater than that node's value.
+
+}
+
+int BSTree::rsearch(int value) {
+  return rsearch(value, root);
+}
+
 
 void BSTree::insert(int value) {
   Node * newnode = new Node(value);
@@ -80,13 +138,6 @@ Node * BSTree::searchR(int x) {
   return search_node(root, x, false);
 }
 
-// p = parent node
-// c = child node to delete
-
-
-
-
-
 void BSTree::remove(int x) {
   // p = parent node, c = child node.
   Node * c = search_node(root, x, false);
@@ -120,8 +171,7 @@ void BSTree::remove(int x) {
 
     p->getRight()->setData(c->getData());
     p1->setLeft(nullptr);
-  }
-  else{
+  } else {
     // case 2:
     c = c->getLeft() != nullptr ? c->getLeft() : c->getRight();
     if (p->getLeft()->getData() == x) {
@@ -138,27 +188,52 @@ void BSTree::remove(int x) {
 }
 
 
-
 void BSTree::delete_node(int x) {
   remove(x);
 }
 
-int BSTree::leaves(Node * n, int cnt){
+int BSTree::leaves(Node * n, int cnt) {
   if (n == nullptr) return 0;
 
-  if (n->getLeft() == nullptr && n->getRight() == nullptr){
-    cnt++; 
+  if (n->getLeft() == nullptr && n->getRight() == nullptr) {
+    return 1;
   }
-  else{
-    return leaves(n->getLeft(), cnt) + leaves(n->getRight(), cnt);
-  }
-  return cnt;
+  return leaves(n->getLeft(), cnt) + leaves(n->getRight(), cnt);
 }
 
 
-int BSTree::count_leaves(){
+int BSTree::count_leaves() {
   return leaves(root, 0);
 }
+
+int BSTree::height(Node *n){
+  if (n == nullptr) return 0;
+  
+  int l = height(n->getLeft());
+  int r = height(n->getRight());
+  
+  return l > r ? l + 1 : r + 1;
+
+}
+
+int BSTree::height() {
+  return height(root);  
+}
+
+int BSTree::sum_lvl(Node * n, int curr, int x) {
+  if (n == nullptr) return 0;
+  if (curr == x) return n->getData();
+
+  return sum_lvl(n->getLeft(), curr + 1, x) + sum_lvl(n->getRight(), curr + 1, x);
+}
+
+int BSTree::sum_level(int x) {
+  if (root == nullptr) throw 1;
+  if (x < 0 || height() < x) throw 2;
+
+  return sum_lvl(root, 1, x);
+}
+
 
 
 void BSTree::setup() {
@@ -170,7 +245,6 @@ void BSTree::setup() {
 
   Node * n2 = new Node(15);
   n->setLeft(n2);
-
 
   n2 = new Node(12);
   n->getLeft()->setLeft(n2);
