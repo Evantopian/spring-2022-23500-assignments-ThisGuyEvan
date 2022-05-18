@@ -4,6 +4,7 @@
 class List{
  private:
   Node *head;
+  int size = 0;
 
  public:
   List();
@@ -14,4 +15,8 @@ class List{
   Node * locate(int index);
   void remove(int index);
   Node * get_head();
+  
+  int get_size();
+
+
 };
