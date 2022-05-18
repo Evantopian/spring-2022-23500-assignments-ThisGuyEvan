@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "Person.h"
 #include "List.h"
 
 #define DICT_ERR_EMPTY 1
@@ -17,8 +18,8 @@ class Dictionary {
 
   void insert(Person * p);
   int hash(std::string key);
-  Person * getPerson(std::string name);
-  std::string getKeys();
+  Person * get_person(std::string name);
+  std::string get_keys();
 };
 
 

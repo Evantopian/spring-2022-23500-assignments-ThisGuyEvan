@@ -1,33 +1,22 @@
-OBJECTS = Dictionary.o List.o Node.o Person.o
-CXXFLAGS = -std=c++11
+main: Person.o Node.o List.o Dictionary.o main.o
+	g++ -o main Person.o Node.o List.o Dictionary.o main.o
 
-main: main.o $(OBJECTS)
-	g++ $(CXXFLAGS) -o main main.o $(OBJECTS)
-
-main.o: main.cpp Dictionary.h 
-	g++ -c main.cpp
+tests: Person.o Node.o List.o Dictionary.o tests.o
+	g++ -o tests Person.o Node.o List.o Dictionary.o tests.o
 
 
-test: test.o $(OBJECTS)
-	g++ -c $(CXXFLAGS) -o tests test.o $(OBJECTS)
+main.o: Dictionary.h main.cpp
 
-test.o: test.cpp doctest.h
-	g++ -c test.cpp 
+tests.o: tests.cpp Dictionary.h
 
+Person.o: Person.h Person.cpp
 
-Person.o: Person.cpp Person.h
-	g++ -c Person.cpp
+Node.o: Node.h Node.cpp Person.h
 
+List.o: List.h List.cpp Node.h
 
-Node.o: Node.cpp Node.h
-	g++ -c Node.cpp
-
-List.o: List.cpp List.h Node.h
-	g++ -c List.cpp
-
-Dictionary.o: Dictionary.cpp Dictionary.h List.h Person.h
-	g++ -c Dictionary.cpp
+Dictionary.o: Dictionary.h Dictionary.cpp List.h
 
 
 clean:
-	rm -rf *.o main tests
+	rm -f *.o main tests
